@@ -3,8 +3,10 @@ import paper from "../assets/paper.png";
 import scissors from "../assets/scissors.png";
 
 import { Card } from "./Card";
+import { useState } from "react";
 
 export const GameArea = () => {
+  const [score, setScore] = useState(0);
   const pcSelect = () => {
     let random = Math.floor(Math.random() * 3);
     let pcCard = "";
@@ -34,6 +36,7 @@ export const GameArea = () => {
       if (pcChoise == "paper") {
         alert(loseMessage);
       } else if (pcChoise == "scissors") {
+        setScore(score + 1);
         alert(winMessage);
       } else {
         alert("Draw");
@@ -42,6 +45,7 @@ export const GameArea = () => {
       if (pcChoise == "scissors") {
         alert(loseMessage);
       } else if (pcChoise == "rock") {
+        setScore(score + 1);
         alert(winMessage);
       } else {
         alert("Draw");
@@ -50,6 +54,7 @@ export const GameArea = () => {
       if (pcChoise == "rock") {
         alert(loseMessage);
       } else if (pcChoise == "paper") {
+        setScore(score + 1);
         alert(winMessage);
       } else {
         alert("Draw");
@@ -58,16 +63,21 @@ export const GameArea = () => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Card id="rock" src={rock} onClick={handleClick}></Card>
-      <Card id="paper" src={paper} onClick={handleClick}></Card>
-      <Card id="scissors" src={scissors} onClick={handleClick}></Card>
+    <div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Card id="rock" src={rock} onClick={handleClick}></Card>
+        <Card id="paper" src={paper} onClick={handleClick}></Card>
+        <Card id="scissors" src={scissors} onClick={handleClick}></Card>
+      </div>
+      <div>
+        <h1>Your score: {score}</h1>
+      </div>
     </div>
   );
 };
