@@ -26,36 +26,50 @@ export const NormalMode = () => {
     return pcCard;
   };
 
+  const clickEffect = (target, color) => {
+    target.style.backgroundColor = color;
+    setTimeout(function () {
+      target.style.backgroundColor = "transparent";
+    }, 500);
+  };
+
   const handleClick = (event) => {
     let pcChoise = pcSelect();
     let loseMessage = "You Lose";
     let winMessage = "You Win";
     let userChoise = event.target.id;
     if (userChoise == pcChoise) {
-      alert("Draw");
+      //alert("Draw");
+      clickEffect(event.target, "blue");
     } else {
       if (userChoise == "rock") {
         if (pcChoise == "paper") {
+          clickEffect(event.target, "red");
           setPcScore(pcScore + 1);
-          alert(loseMessage);
+          //alert(loseMessage);
         } else {
-          alert(winMessage);
+          clickEffect(event.target, "green");
+          //alert(winMessage);
           setScore(score + 1);
         }
       } else if (pcChoise == "paper") {
         if (pcChoise == "scissors") {
+          clickEffect(event.target, "red");
           setPcScore(pcScore + 1);
-          alert(loseMessage);
+          //alert(loseMessage);
         } else {
-          alert(winMessage);
+          clickEffect(event.target, "green");
+          //alert(winMessage);
           setScore(score + 1);
         }
       } else {
         if (pcChoise == "rock") {
+          clickEffect(event.target, "red");
           setPcScore(pcScore + 1);
-          alert(loseMessage);
+          //alert(loseMessage);
         } else {
-          alert(winMessage);
+          clickEffect(event.target, "green");
+          //alert(winMessage);
           setScore(score + 1);
         }
       }
