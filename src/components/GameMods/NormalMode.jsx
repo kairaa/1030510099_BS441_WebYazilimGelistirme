@@ -1,11 +1,11 @@
-import rock from "../assets/rock.png";
-import paper from "../assets/paper.png";
-import scissors from "../assets/scissors.png";
+import rock from "../../assets/rock.png";
+import paper from "../../assets/paper.png";
+import scissors from "../../assets/scissors.png";
 
 import { Card } from "./Card";
 import { useState } from "react";
 
-export const GameArea = () => {
+export const NormalMode = () => {
   const [score, setScore] = useState(0);
   const pcSelect = () => {
     let random = Math.floor(Math.random() * 3);
@@ -21,7 +21,6 @@ export const GameArea = () => {
         pcCard = "scissors";
         break;
     }
-    console.log(`${random} : ${pcCard}`);
     return pcCard;
   };
 
@@ -29,41 +28,43 @@ export const GameArea = () => {
     let pcChoise = pcSelect();
     let loseMessage = "You Lose";
     let winMessage = "You Win";
-    console.log(`you select: ${event.target.id}`);
     let userChoise = event.target.id;
-    console.log(`pc Selected: ${pcChoise}`);
-    if (userChoise == "rock") {
-      if (pcChoise == "paper") {
-        alert(loseMessage);
-      } else if (pcChoise == "scissors") {
-        setScore(score + 1);
-        alert(winMessage);
-      } else {
-        alert("Draw");
-      }
-    } else if (userChoise == "paper") {
-      if (pcChoise == "scissors") {
-        alert(loseMessage);
-      } else if (pcChoise == "rock") {
-        setScore(score + 1);
-        alert(winMessage);
-      } else {
-        alert("Draw");
-      }
-    } else if (userChoise == "scissors") {
-      if (pcChoise == "rock") {
-        alert(loseMessage);
+    if (userChoise == pcChoise) {
+      alert("Draw");
+    } else {
+      if (userChoise == "rock") {
+        if (pcChoise == "paper") {
+          alert(loseMessage);
+        } else {
+          alert(winMessage);
+          setScore(score + 1);
+        }
       } else if (pcChoise == "paper") {
-        setScore(score + 1);
-        alert(winMessage);
+        if (pcChoise == "scissors") {
+          alert(loseMessage);
+        } else {
+          alert(winMessage);
+          setScore(score + 1);
+        }
       } else {
-        alert("Draw");
+        if (pcChoise == "rock") {
+          alert(loseMessage);
+        } else {
+          alert(winMessage);
+          setScore(score + 1);
+        }
       }
     }
   };
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       <div
         style={{
           display: "flex",
