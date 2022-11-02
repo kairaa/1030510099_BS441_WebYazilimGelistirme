@@ -14,7 +14,7 @@ export const ModeCard = (props) => {
           display: "flex",
           justifyContent: "space-between",
           border: "1px solid",
-          width: "10rem",
+          width: "40rem",
           padding: "0 10px",
           margin: "5px 0",
         }}

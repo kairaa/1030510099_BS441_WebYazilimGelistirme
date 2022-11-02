@@ -1,12 +1,14 @@
 import rock from "../../assets/rock.png";
 import paper from "../../assets/paper.png";
 import scissors from "../../assets/scissors.png";
+import "./ModeStyle.css";
 
 import { Card } from "./Card";
 import { useState } from "react";
 
 export const NormalMode = () => {
   const [score, setScore] = useState(0);
+  const [pcScore, setPcScore] = useState(0);
   const pcSelect = () => {
     let random = Math.floor(Math.random() * 3);
     let pcCard = "";
@@ -34,6 +36,7 @@ export const NormalMode = () => {
     } else {
       if (userChoise == "rock") {
         if (pcChoise == "paper") {
+          setPcScore(pcScore + 1);
           alert(loseMessage);
         } else {
           alert(winMessage);
@@ -41,6 +44,7 @@ export const NormalMode = () => {
         }
       } else if (pcChoise == "paper") {
         if (pcChoise == "scissors") {
+          setPcScore(pcScore + 1);
           alert(loseMessage);
         } else {
           alert(winMessage);
@@ -48,6 +52,7 @@ export const NormalMode = () => {
         }
       } else {
         if (pcChoise == "rock") {
+          setPcScore(pcScore + 1);
           alert(loseMessage);
         } else {
           alert(winMessage);
@@ -77,7 +82,8 @@ export const NormalMode = () => {
         <Card id="scissors" src={scissors} onClick={handleClick}></Card>
       </div>
       <div>
-        <h1>Your score: {score}</h1>
+        <h3>Your score: {score}</h3>
+        <h3>PC score: {"  " + pcScore}</h3>
       </div>
     </div>
   );
