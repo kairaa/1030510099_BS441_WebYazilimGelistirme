@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
-import { InfoAlert } from "./InfoAlert";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { NORMAL_MODE, MEMORY_MODE } from "../../constants/constants";
 
 export const ModeCard = (props) => {
   const MySwal = withReactContent(Swal);
+  const text = props.name == "Normal" ? NORMAL_MODE : MEMORY_MODE;
   return (
     <div
       style={{
@@ -28,12 +29,12 @@ export const ModeCard = (props) => {
       <h4
         onClick={() => {
           MySwal.fire({
-            title: props.name,
-            text: "There will be text to explain how user play mods (text will come from props)",
+            title: props.name + " Mode",
+            text: text,
             icon: "info",
             showCancelButton: false,
             confirmButtonColor: "#3085d6",
-            confirmButtonText: "Yes",
+            confirmButtonText: "OK",
           });
         }}
       >

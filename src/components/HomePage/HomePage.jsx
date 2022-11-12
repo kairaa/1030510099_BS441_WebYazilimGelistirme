@@ -11,8 +11,8 @@ export const HomePage = () => {
       }}
     >
       Home Page
-      <ModeCard name="Normal Mode" to="/normal"></ModeCard>
-      <ModeCard name="Memory Mode" to="/memory"></ModeCard>
+      <ModeCard name="Normal" to="/normal"></ModeCard>
+      <ModeCard name="Memory" to="/memory"></ModeCard>
     </div>
   );
 };
