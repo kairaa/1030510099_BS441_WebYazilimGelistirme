@@ -11,8 +11,8 @@ export const Card = (props) => {
         cursor: "pointer",
         margin: "0 20px",
         padding: "10px",
-        width: "100px",
-        height: "100px",
+        width: "150px",
+        height: "150px",
       }}
       alt="item"
     ></img>

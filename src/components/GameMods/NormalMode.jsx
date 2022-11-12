@@ -5,8 +5,15 @@ import "./ModeStyle.css";
 
 import { Card } from "./Card";
 import { useState } from "react";
+import { MyAlert } from "./MyAlert";
 
 export const NormalMode = () => {
+  const cards = {
+    ROCK: "rock",
+    PAPER: "paper",
+    SCISSORS: "scissors",
+  };
+
   const [score, setScore] = useState(0);
   const [pcScore, setPcScore] = useState(0);
   const pcSelect = () => {
@@ -14,13 +21,13 @@ export const NormalMode = () => {
     let pcCard = "";
     switch (random) {
       case 0:
-        pcCard = "rock";
+        pcCard = cards.ROCK;
         break;
       case 1:
-        pcCard = "paper";
+        pcCard = cards.PAPER;
         break;
       case 2:
-        pcCard = "scissors";
+        pcCard = cards.SCISSORS;
         break;
     }
     return pcCard;
@@ -35,48 +42,43 @@ export const NormalMode = () => {
 
   const handleClick = (event) => {
     let pcChoise = pcSelect();
-    let loseMessage = "You Lose";
-    let winMessage = "You Win";
     let userChoise = event.target.id;
     if (userChoise == pcChoise) {
-      //alert("Draw");
       clickEffect(event.target, "blue");
     } else {
-      if (userChoise == "rock") {
-        if (pcChoise == "paper") {
+      if (userChoise == cards.ROCK) {
+        if (pcChoise == cards.PAPER) {
           clickEffect(event.target, "red");
           setPcScore(pcScore + 1);
-          //alert(loseMessage);
         } else {
           clickEffect(event.target, "green");
-          //alert(winMessage);
           setScore(score + 1);
         }
-      } else if (pcChoise == "paper") {
-        if (pcChoise == "scissors") {
+      } else if (userChoise == cards.PAPER) {
+        if (pcChoise == cards.SCISSORS) {
           clickEffect(event.target, "red");
           setPcScore(pcScore + 1);
-          //alert(loseMessage);
         } else {
           clickEffect(event.target, "green");
-          //alert(winMessage);
           setScore(score + 1);
         }
       } else {
-        if (pcChoise == "rock") {
+        if (pcChoise == cards.ROCK) {
           clickEffect(event.target, "red");
           setPcScore(pcScore + 1);
-          //alert(loseMessage);
         } else {
           clickEffect(event.target, "green");
-          //alert(winMessage);
           setScore(score + 1);
         }
       }
     }
   };
 
-  return (
+  return pcScore == 10 ? (
+    <MyAlert msg="You Lose" icon="error"></MyAlert>
+  ) : score == 10 ? (
+    <MyAlert msg="You Win" icon="success"></MyAlert>
+  ) : (
     <div
       style={{
         display: "flex",
