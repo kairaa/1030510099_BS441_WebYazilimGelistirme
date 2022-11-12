@@ -3,11 +3,39 @@ import paper from "../../assets/paper.png";
 import scissors from "../../assets/scissors.png";
 import "./ModeStyle.css";
 
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import { useNavigate } from "react-router-dom";
+import { useCallback } from "react";
+
 import { Card } from "./Card";
 import { useState } from "react";
-import { MyAlert } from "./MyAlert";
 
 export const NormalMode = () => {
+  const MySwal = withReactContent(Swal);
+  const navigate = useNavigate();
+  const handleOnClick = useCallback(() => navigate("/"));
+  const handleOnClickWin = useCallback(() => navigate("/normal"));
+
+  const MyAlert = (msg, icon) => {
+    MySwal.fire({
+      title: msg,
+      text: "Do you want to play again?",
+      icon: "info",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setScore(0);
+        setPcScore(0);
+      } else {
+        handleOnClick();
+      }
+    });
+  };
   const cards = {
     ROCK: "rock",
     PAPER: "paper",
@@ -50,25 +78,43 @@ export const NormalMode = () => {
         if (pcChoise == cards.PAPER) {
           clickEffect(event.target, "red");
           setPcScore(pcScore + 1);
+          if (pcScore == 9) {
+            MyAlert("You Lose", "error");
+          }
         } else {
           clickEffect(event.target, "green");
           setScore(score + 1);
+          if (score == 9) {
+            MyAlert("You Win", "success");
+          }
         }
       } else if (userChoise == cards.PAPER) {
         if (pcChoise == cards.SCISSORS) {
           clickEffect(event.target, "red");
           setPcScore(pcScore + 1);
+          if (pcScore == 9) {
+            MyAlert("You Lose", "error");
+          }
         } else {
           clickEffect(event.target, "green");
           setScore(score + 1);
+          if (score == 9) {
+            MyAlert("You Win", "success");
+          }
         }
       } else {
         if (pcChoise == cards.ROCK) {
           clickEffect(event.target, "red");
           setPcScore(pcScore + 1);
+          if (pcScore == 9) {
+            MyAlert("You Lose", "error");
+          }
         } else {
           clickEffect(event.target, "green");
           setScore(score + 1);
+          if (score == 9) {
+            MyAlert("You Win", "success");
+          }
         }
       }
     }

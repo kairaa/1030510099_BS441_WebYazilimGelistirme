@@ -24,7 +24,7 @@ export const ModeCard = (props) => {
         }}
         to={props.to}
       >
-        <h4>{props.name}</h4>
+        <h4>{props.name} Mode</h4>
       </Link>
       <h4
         onClick={() => {
