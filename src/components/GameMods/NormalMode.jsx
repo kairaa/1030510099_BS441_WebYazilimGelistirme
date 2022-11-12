@@ -74,11 +74,7 @@ export const NormalMode = () => {
     }
   };
 
-  return pcScore == 10 ? (
-    <MyAlert msg="You Lose" icon="error"></MyAlert>
-  ) : score == 10 ? (
-    <MyAlert msg="You Win" icon="success"></MyAlert>
-  ) : (
+  return (
     <div
       style={{
         display: "flex",
