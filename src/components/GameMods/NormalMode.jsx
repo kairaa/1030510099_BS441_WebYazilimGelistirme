@@ -15,13 +15,12 @@ export const NormalMode = () => {
   const MySwal = withReactContent(Swal);
   const navigate = useNavigate();
   const handleOnClick = useCallback(() => navigate("/"));
-  const handleOnClickWin = useCallback(() => navigate("/normal"));
 
   const MyAlert = (msg, icon) => {
     MySwal.fire({
       title: msg,
       text: "Do you want to play again?",
-      icon: "info",
+      icon: icon,
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
