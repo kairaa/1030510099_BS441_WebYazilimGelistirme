@@ -1,9 +1,8 @@
 export const Card = (props) => {
   return (
-    <img
+    <div
       id={props.id}
       onClick={props.onClick}
-      src={props.src}
       style={{
         display: "block",
         border: "1px solid",
@@ -12,9 +11,19 @@ export const Card = (props) => {
         margin: "0 20px",
         padding: "10px",
         width: "150px",
+        textAlign: "center",
         height: "150px",
       }}
-      alt="item"
-    ></img>
+    >
+      <img
+        src={props.src}
+        style={{
+          marginTop: "25px",
+          width: "100px",
+          height: "100px",
+        }}
+        alt="item"
+      ></img>
+    </div>
   );
 };

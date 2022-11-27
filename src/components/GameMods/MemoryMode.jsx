@@ -22,7 +22,7 @@ export const MemoryMode = () => {
   const navigate = useNavigate();
   const handleOnClick = useCallback(() => navigate("/"));
 
-  const addEffect = () => {};
+  //const addEffect = () => {};
 
   const initialize = () => {
     setLevel(0);
@@ -84,7 +84,7 @@ export const MemoryMode = () => {
       MyAlert("You Lose", "error");
     }
     setLevel(level + 1);
-    if (level == 9) {
+    if (level === 9) {
       MyAlert("You Win", "success");
     }
   };
@@ -95,6 +95,7 @@ export const MemoryMode = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        marginTop: "100px",
       }}
     >
       <div

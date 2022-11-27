@@ -35,10 +35,11 @@ export const ModeCard = (props) => {
             showCancelButton: false,
             confirmButtonColor: "#3085d6",
             confirmButtonText: "OK",
+            cursor: "pointer",
           });
         }}
       >
-        {"How to play?"}
+        How to play?
       </h4>
     </div>
   );

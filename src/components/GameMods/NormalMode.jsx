@@ -43,6 +43,11 @@ export const NormalMode = () => {
 
   const [score, setScore] = useState(0);
   const [pcScore, setPcScore] = useState(0);
+  const [isActive, setIsActive] = useState(true);
+
+  const toggleClass = () => {
+    setIsActive(!isActive);
+  };
   const pcSelect = () => {
     let random = Math.floor(Math.random() * 3);
     let pcCard = "";
@@ -62,6 +67,7 @@ export const NormalMode = () => {
 
   const clickEffect = (target, color) => {
     target.style.backgroundColor = color;
+    //target.className={isActive ? "elementToFadeInAndOut" : ''};
     setTimeout(function () {
       target.style.backgroundColor = "transparent";
     }, 500);
@@ -71,16 +77,19 @@ export const NormalMode = () => {
     let pcChoise = pcSelect();
     let userChoise = event.target.id;
     if (userChoise == pcChoise) {
+      toggleClass();
       clickEffect(event.target, "blue");
     } else {
       if (userChoise == cards.ROCK) {
         if (pcChoise == cards.PAPER) {
+          toggleClass();
           clickEffect(event.target, "red");
           setPcScore(pcScore + 1);
           if (pcScore == 9) {
             MyAlert("You Lose", "error");
           }
         } else {
+          toggleClass();
           clickEffect(event.target, "green");
           setScore(score + 1);
           if (score == 9) {
@@ -89,12 +98,14 @@ export const NormalMode = () => {
         }
       } else if (userChoise == cards.PAPER) {
         if (pcChoise == cards.SCISSORS) {
+          toggleClass();
           clickEffect(event.target, "red");
           setPcScore(pcScore + 1);
           if (pcScore == 9) {
             MyAlert("You Lose", "error");
           }
         } else {
+          toggleClass();
           clickEffect(event.target, "green");
           setScore(score + 1);
           if (score == 9) {
@@ -103,12 +114,14 @@ export const NormalMode = () => {
         }
       } else {
         if (pcChoise == cards.ROCK) {
+          toggleClass();
           clickEffect(event.target, "red");
           setPcScore(pcScore + 1);
           if (pcScore == 9) {
             MyAlert("You Lose", "error");
           }
         } else {
+          toggleClass();
           clickEffect(event.target, "green");
           setScore(score + 1);
           if (score == 9) {
@@ -125,6 +138,7 @@ export const NormalMode = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        marginTop: "100px",
       }}
     >
       <div
