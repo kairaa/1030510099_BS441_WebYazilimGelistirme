@@ -5,20 +5,34 @@ h4 {
   font-family: "Press Start 2P", cursive;
 }
 
-.elementToFadeInAndOut {
-  animation: fadeInOut 4s linear 1 forwards;
-  color: red;
-  background-color: blue;
+.outer-div {
+  display: "flex";
+  flex-direction: "column";
+  align-items: "center";
+  margin-top: "100px";
 }
 
-@keyframes fadeInOut {
-  0% {
-    opacity: 0;
-  }
+.inner-div {
+  display: flex;
+  align-items: "center";
+  justify-content: "center";
+}
+
+.elementToFadeInAndOut {
+  background: red;
+  -webkit-animation: fadeinout 1s linear forwards;
+  animation: fadeinout 1s linear forwards;
+  opacity: 0;
+}
+
+@-webkit-keyframes fadeinout {
   50% {
     opacity: 1;
   }
-  100% {
-    opacity: 0;
+}
+
+@keyframes fadeinout {
+  50% {
+    opacity: 1;
   }
 }

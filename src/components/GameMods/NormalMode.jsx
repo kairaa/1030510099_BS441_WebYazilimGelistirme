@@ -28,6 +28,9 @@ export const NormalMode = () => {
       cancelButtonText: "No",
     }).then((result) => {
       if (result.isConfirmed) {
+        setPaperIsActive(false);
+        setRockIsActive(false);
+        setScissorsIsActive(false);
         setScore(0);
         setPcScore(0);
       } else {
@@ -43,11 +46,22 @@ export const NormalMode = () => {
 
   const [score, setScore] = useState(0);
   const [pcScore, setPcScore] = useState(0);
-  const [isActive, setIsActive] = useState(true);
+  const [rockIsActive, setRockIsActive] = useState(false);
+  const [paperIsActive, setPaperIsActive] = useState(false);
+  const [scissorsIsActive, setScissorsIsActive] = useState(false);
 
-  const toggleClass = () => {
-    setIsActive(!isActive);
+  const toggleRock = () => {
+    setRockIsActive(!rockIsActive);
   };
+
+  const togglePaper = () => {
+    setPaperIsActive(!paperIsActive);
+  };
+
+  const toggleScissor = () => {
+    setScissorsIsActive(!scissorsIsActive);
+  };
+
   const pcSelect = () => {
     let random = Math.floor(Math.random() * 3);
     let pcCard = "";
@@ -67,30 +81,31 @@ export const NormalMode = () => {
 
   const clickEffect = (target, color) => {
     target.style.backgroundColor = color;
-    //target.className={isActive ? "elementToFadeInAndOut" : ''};
     setTimeout(function () {
       target.style.backgroundColor = "transparent";
     }, 500);
   };
 
   const handleClick = (event) => {
+    console.log("rock: " + rockIsActive);
+    console.log("paper: " + paperIsActive);
+    console.log("scissors: " + scissorsIsActive);
     let pcChoise = pcSelect();
     let userChoise = event.target.id;
     if (userChoise == pcChoise) {
-      toggleClass();
-      clickEffect(event.target, "blue");
+      //clickEffect(event.target, "blue");
     } else {
       if (userChoise == cards.ROCK) {
         if (pcChoise == cards.PAPER) {
-          toggleClass();
-          clickEffect(event.target, "red");
+          //clickEffect(event.target, "red");
+          toggleRock();
           setPcScore(pcScore + 1);
           if (pcScore == 9) {
             MyAlert("You Lose", "error");
           }
         } else {
-          toggleClass();
-          clickEffect(event.target, "green");
+          //clickEffect(event.target, "green");
+          toggleRock();
           setScore(score + 1);
           if (score == 9) {
             MyAlert("You Win", "success");
@@ -98,15 +113,15 @@ export const NormalMode = () => {
         }
       } else if (userChoise == cards.PAPER) {
         if (pcChoise == cards.SCISSORS) {
-          toggleClass();
-          clickEffect(event.target, "red");
+          //clickEffect(event.target, "red");
+          togglePaper();
           setPcScore(pcScore + 1);
           if (pcScore == 9) {
             MyAlert("You Lose", "error");
           }
         } else {
-          toggleClass();
-          clickEffect(event.target, "green");
+          //clickEffect(event.target, "green");
+          togglePaper();
           setScore(score + 1);
           if (score == 9) {
             MyAlert("You Win", "success");
@@ -114,15 +129,15 @@ export const NormalMode = () => {
         }
       } else {
         if (pcChoise == cards.ROCK) {
-          toggleClass();
-          clickEffect(event.target, "red");
+          //clickEffect(event.target, "red");
+          toggleScissor();
           setPcScore(pcScore + 1);
           if (pcScore == 9) {
             MyAlert("You Lose", "error");
           }
         } else {
-          toggleClass();
-          clickEffect(event.target, "green");
+          //clickEffect(event.target, "green");
+          toggleScissor();
           setScore(score + 1);
           if (score == 9) {
             MyAlert("You Win", "success");
@@ -141,16 +156,25 @@ export const NormalMode = () => {
         marginTop: "100px",
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Card id="rock" src={rock} onClick={handleClick}></Card>
-        <Card id="paper" src={paper} onClick={handleClick}></Card>
-        <Card id="scissors" src={scissors} onClick={handleClick}></Card>
+      <div className="inner-div">
+        <Card
+          id="rock"
+          active={rockIsActive}
+          src={rock}
+          onClick={handleClick}
+        ></Card>
+        <Card
+          id="paper"
+          active={paperIsActive}
+          src={paper}
+          onClick={handleClick}
+        ></Card>
+        <Card
+          id="scissors"
+          active={scissorsIsActive}
+          src={scissors}
+          onClick={handleClick}
+        ></Card>
       </div>
       <div>
         <h3>Your score: {score}</h3>
