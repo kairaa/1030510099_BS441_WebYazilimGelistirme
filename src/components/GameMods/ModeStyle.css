@@ -19,14 +19,13 @@ h4 {
 }
 
 .elementToFadeInAndOut {
-  background: red;
-  -webkit-animation: fadeinout 1s linear forwards;
-  animation: fadeinout 1s linear forwards;
+  -webkit-animation: fadeinout 10s linear forwards;
+  animation: fadeinout 10s linear forwards;
   opacity: 0;
 }
 
 @-webkit-keyframes fadeinout {
-  50% {
+  100% {
     opacity: 1;
   }
 }

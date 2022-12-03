@@ -5,7 +5,6 @@ export const Card = (props) => {
     <div
       id={props.id}
       onClick={props.onClick}
-      className={props.active ? "elementToFadeInAndOut" : ""}
       style={{
         display: "block",
         border: "1px solid",
@@ -19,7 +18,9 @@ export const Card = (props) => {
       }}
     >
       <img
+        id={props.id}
         src={props.src}
+        onClick={props.effect}
         style={{
           marginTop: "25px",
           width: "100px",
