@@ -65,7 +65,7 @@ export const NormalMode = () => {
     target.style.backgroundColor = color;
     setTimeout(function () {
       target.style.backgroundColor = "transparent";
-    }, 500);
+    }, 250);
   };
 
   const handleClick = (e) => {

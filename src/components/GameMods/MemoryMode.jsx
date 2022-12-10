@@ -33,8 +33,6 @@ function createGamePattern(level) {
 createGamePattern(10);
 
 export const MemoryMode = () => {
-  //const second = 10;
-  //console.log(gamePattern);
   const [time, setTime] = useState(10);
 
   useEffect(() => {
@@ -47,20 +45,12 @@ export const MemoryMode = () => {
   const navigate = useNavigate();
   const handleOnClick = useCallback(() => navigate("/"));
 
-  //const addEffect = () => {};
-
   const initialize = () => {
     gamePattern = [];
     showCardItem = [];
     createGamePattern(10);
     setLevel(0);
-  };
-
-  const clickEffect = (target, color) => {
-    target.style.backgroundColor = color;
-    setTimeout(function () {
-      target.style.backgroundColor = "transparent";
-    }, 500);
+    setTime(10);
   };
 
   const MyAlert = (msg, icon) => {
@@ -95,14 +85,6 @@ export const MemoryMode = () => {
   const handleClick = (event) => {
     //console.log(gamePattern);
     const userChoise = event.target.id;
-    // console.log(`user choise: ${userChoise}`);
-    // console.log(
-    //   `level : ${level} - pc select: ${
-    //     gamePattern[level]
-    //   } - you select: ${userChoise} - result: ${
-    //     checkIsContinue(userChoise) ? "you win" : "you lose"
-    //   }`
-    // );
     if (!checkIsContinue(userChoise)) {
       MyAlert("You Lose", "error");
     }
@@ -165,35 +147,4 @@ export const MemoryMode = () => {
       ></div>
     </div>
   );
-  // <div
-  //   style={{
-  //     display: "flex",
-  //     flexDirection: "column",
-  //     alignItems: "center",
-  //     marginTop: "100px",
-  //   }}
-  // >
-  //   <div
-  //     className="elementToFadeInAndOut"
-  //     style={{
-  //       display: "flex",
-  //     }}
-  //   >
-  //     {showCardItem.map((card) => card)}
-  //   </div>
-  //   <div
-  //     style={{
-  //       display: "flex",
-  //       alignItems: "center",
-  //       justifyContent: "center",
-  //     }}
-  //   >
-  //     <Card id="rock" src={rock} onClick={handleClick}></Card>
-  //     <Card id="paper" src={paper} onClick={handleClick}></Card>
-  //     <Card id="scissors" src={scissors} onClick={handleClick}></Card>
-  //   </div>
-  //   <div>
-  //     <h3>Level: {level + 1}</h3>
-  //   </div>
-  // </div>
 };
