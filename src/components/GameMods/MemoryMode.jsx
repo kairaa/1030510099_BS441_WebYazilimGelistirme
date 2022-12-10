@@ -9,21 +9,39 @@ import withReactContent from "sweetalert2-react-content";
 import { useNavigate } from "react-router-dom";
 import { useCallback } from "react";
 import { useState } from "react";
+import { useEffect } from "react";
 import { Card } from "./Card";
 
 const cards = ["rock", "paper", "scissors"];
 let gamePattern = [];
+let showCardItem = [];
+
 function createGamePattern(level) {
   for (let i = 0; i < level; i++) {
     let random = Math.floor(Math.random() * 3);
     console.log(`${i}: ${cards[random]}`);
     gamePattern.push(cards[random]);
+    let cardSrc =
+      cards[random] == "rock"
+        ? rock
+        : cards[random] == "paper"
+        ? paper
+        : scissors;
+    showCardItem.push(<Card src={cardSrc}></Card>);
   }
 }
 createGamePattern(10);
 
 export const MemoryMode = () => {
+  //const second = 10;
   //console.log(gamePattern);
+  const [time, setTime] = useState(10);
+
+  useEffect(() => {
+    const timer = time > 0 && setInterval(() => setTime(time - 1), 1000);
+    return () => clearInterval(timer);
+  }, [time]);
+
   const [level, setLevel] = useState(0);
   const MySwal = withReactContent(Swal);
   const navigate = useNavigate();
@@ -33,6 +51,7 @@ export const MemoryMode = () => {
 
   const initialize = () => {
     gamePattern = [];
+    showCardItem = [];
     createGamePattern(10);
     setLevel(0);
   };
@@ -64,14 +83,6 @@ export const MemoryMode = () => {
   };
 
   const checkIsContinue = (userChoise) => {
-    // switch (userChoise) {
-    //   case "rock":
-    //     return gamePattern[level] == "scissors";
-    //   case "paper":
-    //     return gamePattern[level] == "rock";
-    //   case "scissors":
-    //     return gamePattern[level] == "paper";
-    // }
     if (userChoise === "rock") {
       return gamePattern[level] === "scissors";
     } else if (userChoise === "paper") {
@@ -84,14 +95,14 @@ export const MemoryMode = () => {
   const handleClick = (event) => {
     //console.log(gamePattern);
     const userChoise = event.target.id;
-    console.log(`user choise: ${userChoise}`);
-    console.log(
-      `level : ${level} - pc select: ${
-        gamePattern[level]
-      } - you select: ${userChoise} - result: ${
-        checkIsContinue(userChoise) ? "you win" : "you lose"
-      }`
-    );
+    // console.log(`user choise: ${userChoise}`);
+    // console.log(
+    //   `level : ${level} - pc select: ${
+    //     gamePattern[level]
+    //   } - you select: ${userChoise} - result: ${
+    //     checkIsContinue(userChoise) ? "you win" : "you lose"
+    //   }`
+    // );
     if (!checkIsContinue(userChoise)) {
       MyAlert("You Lose", "error");
     }
@@ -101,7 +112,7 @@ export const MemoryMode = () => {
     }
   };
 
-  return (
+  return time == 0 ? (
     <div
       style={{
         display: "flex",
@@ -110,11 +121,6 @@ export const MemoryMode = () => {
         marginTop: "100px",
       }}
     >
-      <span className="elementToFadeInAndOut">
-        {gamePattern.map((card) => (
-          <p>{card}</p>
-        ))}
-      </span>
       <div
         style={{
           display: "flex",
@@ -130,5 +136,64 @@ export const MemoryMode = () => {
         <h3>Level: {level + 1}</h3>
       </div>
     </div>
+  ) : (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        marginTop: "100px",
+      }}
+    >
+      <h3>Hurry up! You have only {time} seconds to start the game!</h3>
+      <h4>PC selected these cards</h4>
+      <div
+        style={{
+          display: "flex",
+          marginRight: "100px",
+          marginLeft: "100px",
+        }}
+      >
+        {showCardItem.map((card) => card)}
+      </div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      ></div>
+    </div>
   );
+  // <div
+  //   style={{
+  //     display: "flex",
+  //     flexDirection: "column",
+  //     alignItems: "center",
+  //     marginTop: "100px",
+  //   }}
+  // >
+  //   <div
+  //     className="elementToFadeInAndOut"
+  //     style={{
+  //       display: "flex",
+  //     }}
+  //   >
+  //     {showCardItem.map((card) => card)}
+  //   </div>
+  //   <div
+  //     style={{
+  //       display: "flex",
+  //       alignItems: "center",
+  //       justifyContent: "center",
+  //     }}
+  //   >
+  //     <Card id="rock" src={rock} onClick={handleClick}></Card>
+  //     <Card id="paper" src={paper} onClick={handleClick}></Card>
+  //     <Card id="scissors" src={scissors} onClick={handleClick}></Card>
+  //   </div>
+  //   <div>
+  //     <h3>Level: {level + 1}</h3>
+  //   </div>
+  // </div>
 };
