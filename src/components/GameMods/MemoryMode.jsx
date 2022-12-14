@@ -132,8 +132,6 @@ export const MemoryMode = () => {
       <div
         style={{
           display: "flex",
-          marginRight: "100px",
-          marginLeft: "100px",
         }}
       >
         {showCardItem.map((card) => card)}
